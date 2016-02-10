@@ -23566,7 +23566,7 @@ var Base = React.createClass({
 
 module.exports = Base;
 
-},{"./TabBar.jsx":216,"react":206}],210:[function(require,module,exports){
+},{"./TabBar.jsx":217,"react":206}],210:[function(require,module,exports){
 var React = require("react");
 
 var ImageItem = React.createClass({
@@ -23575,11 +23575,17 @@ var ImageItem = React.createClass({
   render: function () {
 
     var imageItemStyle = {
+      display: "inline-block",
+      backgroundImage: "url(" + this.props.image + ")",
+      backgroundSize: "cover",
+      backgroundPosition: "50% 50%",
       width: 200,
-      height: 120
+      height: 120,
+      marginRight: 8,
+      marginBottom: 8
     };
 
-    return React.createElement("img", { src: this.props.image, style: imageItemStyle });
+    return React.createElement("div", { style: imageItemStyle });
   }
 });
 
@@ -23595,7 +23601,6 @@ var ImageList = React.createClass({
   render: function () {
 
     var createItem = function (image, index) {
-      // "key" and "text" are the "props" in the ListItem component
       return React.createElement(ImageItem, { key: index, image: image });
     };
 
@@ -23604,9 +23609,6 @@ var ImageList = React.createClass({
       marginBottom: 24
     };
 
-    // this.props.items is an array
-    // JavaScript ".map()" will iterate through an array and call that function
-    // each time
     return React.createElement(
       "div",
       { style: imageListStyle },
@@ -23627,19 +23629,29 @@ var PageNews = React.createClass({
   render: function () {
 
     var items = [{
-      header: "Obesity in America",
-      subheader: "Why are Americans so fat?",
-      description: "Us Americans are fat. On every corner there is a McDonalds or KFC. Michelle Obama wants Americans to become Vegan. Civil war and unrest have sprung up due to this debate...",
-      citation: "Kentucky, USA",
-      icon: "asdf",
-      images: ["adsfvxzc", "adsfzvxc", "234dfs"]
+      header: "Supreme Court blocks Obama carbon emissions plan",
+      description: "WASHINGTON The U.S. Supreme Court on Tuesday delivered a major blow to President Barack Obama by putting on hold federal regulations to curb carbon dioxide emissions mainly from coal-fired power plants, the centerpiece of his administration's ...",
+      citation: "Reuters	 - ‎4 hours ago",
+      icon: "images/source-reuters.png",
+      images: ["images/news-reuters-smokestack.jpg", "images/news-reuters-obama.jpg"]
     }, {
-      header: "asdzcvf",
-      subheader: "adsfvcxz",
-      description: "adsfzvcxzcv",
-      citation: "adfcvz",
-      icon: "adfzxcv",
-      images: ["adsfvxzc", "adsfzvxc", "234dfs"]
+      header: "DOJ threatens legal action against Ferguson",
+      description: "FERGUSON, Mo. - The Justice Department said on Wednesday that it is exploring &quot;legal actions&quot; against the city of Ferguson, just hours after the city council in the St. Louis suburb called for the revision of several aspects of a tentative agreement ...",
+      citation: "USA TODAY	 - ‎1 hour ago‎",
+      icon: "images/source-usatoday.png",
+      images: ["images/news-usatoday-ferguson.jpg", "images/news-usatoday-police.jpg"]
+    }, {
+      header: "Stephen Curry's 35 points lift Warriors to 42nd straight home win",
+      description: "OAKLAND, Calif. -- Stephen Curry had 35 points, nine assists and six rebounds and the Golden State Warriors relied on a signature putaway fourth quarter to hold off the Houston Rockets 123-110 on Tuesday night.",
+      citation: "ESPN	 - ‎3 hours ago‎",
+      icon: "images/source-espn.png",
+      images: ["images/news-espn-warriors.jpg"]
+    }, {
+      header: "Developers of Toppled Taiwan Building Detained",
+      description: "TAINAN, Taiwan - Three Taiwanese construction company executives have been detained on charges of professional negligence resulting in death following the collapse of an apartment building that killed dozens.",
+      citation: "New York Times	 - ‎4 hours ago‎",
+      icon: "images/source-nytimes.png",
+      images: ["images/news-nytimes-taiwan.jpg"]
     }];
 
     return React.createElement(
@@ -23652,8 +23664,10 @@ var PageNews = React.createClass({
 
 module.exports = PageNews;
 
-},{"./StoryList.jsx":215,"react":206}],213:[function(require,module,exports){
+},{"./StoryList.jsx":216,"react":206}],213:[function(require,module,exports){
 var React = require("react");
+
+var PhotoItem = require("./PhotoItem.jsx");
 
 var PagePhotos = React.createClass({
   displayName: "PagePhotos",
@@ -23663,6 +23677,13 @@ var PagePhotos = React.createClass({
     var photoStyle = {
       backgroundColor: "red",
       height: 200
+    };
+
+    var photos = ["images/photo1.jpg", "images/photo2.jpg", "images/photo3.jpg", "images/photo4.jpg", "images/photo5.jpg", "images/photo6.jpg", "images/photo7.jpg", "images/photo8.jpg"];
+
+    var createItem = function (photo, index) {
+      var photo = photo || "images/blank.gif";
+      return React.createElement(PhotoItem, { key: index, photo: photo });
     };
 
     return React.createElement(
@@ -23677,26 +23698,7 @@ var PagePhotos = React.createClass({
           React.createElement(
             "div",
             { className: "mdl-grid mdl-card__news-story" },
-            React.createElement(
-              "div",
-              { className: "mdl-cell mdl-cell--3-col-desktop mdl-cell--12-col-phone", style: photoStyle },
-              "adf"
-            ),
-            React.createElement(
-              "div",
-              { className: "mdl-cell mdl-cell--3-col-desktop mdl-cell--12-col-phone", style: photoStyle },
-              "adf"
-            ),
-            React.createElement(
-              "div",
-              { className: "mdl-cell mdl-cell--3-col-desktop mdl-cell--12-col-phone", style: photoStyle },
-              "adf"
-            ),
-            React.createElement(
-              "div",
-              { className: "mdl-cell mdl-cell--3-col-desktop mdl-cell--12-col-phone", style: photoStyle },
-              "adf"
-            )
+            photos.map(createItem)
           )
         )
       )
@@ -23706,7 +23708,30 @@ var PagePhotos = React.createClass({
 
 module.exports = PagePhotos;
 
-},{"react":206}],214:[function(require,module,exports){
+},{"./PhotoItem.jsx":214,"react":206}],214:[function(require,module,exports){
+var React = require("react");
+
+var PhotoItem = React.createClass({
+  displayName: "PhotoItem",
+
+  render: function () {
+
+    var photoStyle = {
+      backgroundColor: "#eeeeee",
+      backgroundImage: "url(" + this.props.photo + ")",
+      backgroundSize: "cover",
+      backgroundPosition: "50% 50%",
+      height: 200
+    };
+
+    return React.createElement("div", { className: "mdl-cell mdl-cell--3-col-desktop mdl-cell--12-col-phone", style: photoStyle });
+  }
+
+});
+
+module.exports = PhotoItem;
+
+},{"react":206}],215:[function(require,module,exports){
 var React = require("react");
 var ImageList = require("./ImageList.jsx");
 
@@ -23717,13 +23742,7 @@ var StoryItem = React.createClass({
 
     var headerStyle = {
       marginTop: 0,
-      marginBottom: 8,
-      fontWeight: "bold"
-    };
-    var subheaderStyle = {
-      marginTop: 0,
-      marginBottom: 24,
-      fontWeight: "normal"
+      marginBottom: 8
     };
     var citeStyle = {
       fontStyle: "normal",
@@ -23759,11 +23778,6 @@ var StoryItem = React.createClass({
               this.props.header
             ),
             React.createElement(
-              "h5",
-              { style: subheaderStyle },
-              this.props.subheader
-            ),
-            React.createElement(
               "p",
               null,
               this.props.description
@@ -23784,7 +23798,7 @@ var StoryItem = React.createClass({
 
 module.exports = StoryItem;
 
-},{"./ImageList.jsx":211,"react":206}],215:[function(require,module,exports){
+},{"./ImageList.jsx":211,"react":206}],216:[function(require,module,exports){
 var React = require("react");
 var StoryItem = require("./StoryItem.jsx");
 
@@ -23813,7 +23827,7 @@ var StoryList = React.createClass({
 
 module.exports = StoryList;
 
-},{"./StoryItem.jsx":214,"react":206}],216:[function(require,module,exports){
+},{"./StoryItem.jsx":215,"react":206}],217:[function(require,module,exports){
 var React = require("react");
 
 var TabBar = React.createClass({
@@ -23851,7 +23865,7 @@ var TabBar = React.createClass({
 
 module.exports = TabBar;
 
-},{"react":206}],217:[function(require,module,exports){
+},{"react":206}],218:[function(require,module,exports){
 var React = require("react");
 var ReactDom = require("react-dom");
 
@@ -23859,4 +23873,4 @@ var Routes = require("./Routes.jsx");
 
 ReactDom.render(Routes, document.getElementById("main-container"));
 
-},{"./Routes.jsx":208,"react":206,"react-dom":24}]},{},[217]);
+},{"./Routes.jsx":208,"react":206,"react-dom":24}]},{},[218]);

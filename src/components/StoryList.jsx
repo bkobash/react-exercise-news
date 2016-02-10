@@ -15,6 +15,7 @@ var StoryList = React.createClass({
     }
 
     return (<div>{this.props.items.map(createItem)}</div>)
+    
   }
 });
 

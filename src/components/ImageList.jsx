@@ -5,7 +5,6 @@ var ImageList = React.createClass({
   render: function() {
 
     var createItem = function(image, index) {
-      // "key" and "text" are the "props" in the ListItem component
       return <ImageItem key={index} image={image} />;
     }
 
@@ -14,9 +13,6 @@ var ImageList = React.createClass({
       marginBottom: 24
     };
 
-    // this.props.items is an array
-    // JavaScript ".map()" will iterate through an array and call that function
-    // each time
     return (<div style={imageListStyle}>{this.props.items.map(createItem)}</div>)
   }
 });

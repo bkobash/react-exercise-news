@@ -7,8 +7,8 @@ var Base = React.createClass({
 
   render: function() {
 
-    // insert the children here; when you switch routes, it'll switch pages
-    // automatically
+    // need an extra DIV to wrap this, because .mdl-js-layout does a bunch of
+    // DOM manipulation that conflicts with React.
     return (
       <div>
         <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">

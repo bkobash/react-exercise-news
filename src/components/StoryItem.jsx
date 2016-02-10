@@ -7,14 +7,8 @@ var StoryItem = React.createClass({
 
     var headerStyle = {
       marginTop: 0,
-      marginBottom: 8,
-      fontWeight: "bold"
+      marginBottom: 8
     };
-    var subheaderStyle = {
-      marginTop: 0,
-      marginBottom: 24,
-      fontWeight: "normal"
-    }
     var citeStyle = {
       fontStyle: "normal",
       fontSize: "12px",
@@ -35,7 +29,6 @@ var StoryItem = React.createClass({
             </div>
             <div className="mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
               <h4 style={headerStyle}>{this.props.header}</h4>
-              <h5 style={subheaderStyle}>{this.props.subheader}</h5>
               <p>{this.props.description}</p>
               <ImageList items={this.props.images} />
               <cite style={citeStyle}>{this.props.citation}</cite>
