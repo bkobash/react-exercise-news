@@ -30,7 +30,7 @@ var StoryItem = React.createClass({
             <div className="mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--3-col-phone">
               <h4 style={headerStyle}>{this.props.header}</h4>
               <p>{this.props.description}</p>
-              <ImageList items={this.props.images} />
+              <ImageList images={this.props.images} />
               <cite style={citeStyle}>{this.props.citation}</cite>
             </div>
           </div>

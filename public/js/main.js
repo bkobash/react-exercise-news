@@ -23598,6 +23598,16 @@ var ImageItem = require("./ImageItem.jsx");
 var ImageList = React.createClass({
   displayName: "ImageList",
 
+  propTypes: {
+    images: React.PropTypes.array
+  },
+
+  getDefaultProps: function () {
+    return {
+      images: []
+    };
+  },
+
   render: function () {
 
     var createItem = function (image, index) {
@@ -23612,7 +23622,7 @@ var ImageList = React.createClass({
     return React.createElement(
       "div",
       { style: imageListStyle },
-      this.props.items.map(createItem)
+      this.props.images.map(createItem)
     );
   }
 });
@@ -23674,15 +23684,9 @@ var PagePhotos = React.createClass({
 
   render: function () {
 
-    var photoStyle = {
-      backgroundColor: "red",
-      height: 200
-    };
-
     var photos = ["images/photo1.jpg", "images/photo2.jpg", "images/photo3.jpg", "images/photo4.jpg", "images/photo5.jpg", "images/photo6.jpg", "images/photo7.jpg", "images/photo8.jpg"];
 
     var createItem = function (photo, index) {
-      var photo = photo || "images/blank.gif";
       return React.createElement(PhotoItem, { key: index, photo: photo });
     };
 
@@ -23782,7 +23786,7 @@ var StoryItem = React.createClass({
               null,
               this.props.description
             ),
-            React.createElement(ImageList, { items: this.props.images }),
+            React.createElement(ImageList, { images: this.props.images }),
             React.createElement(
               "cite",
               { style: citeStyle },
@@ -23805,16 +23809,25 @@ var StoryItem = require("./StoryItem.jsx");
 var StoryList = React.createClass({
   displayName: "StoryList",
 
+  propTypes: {
+    item: React.PropTypes.object.isRequired
+  },
+
+  getDefaultProps: function () {
+    return {
+      item: {}
+    };
+  },
+
   render: function () {
 
     var createItem = function (item, index) {
       var header = item.header || "Headline",
-          subheader = item.subheader || "Subheader",
           description = item.description || "Lorem ipsum",
           citation = item.citation || "San Francisco, CA",
           images = item.images || [],
           icon = item.icon || "images/blank.gif";
-      return React.createElement(StoryItem, { key: index, header: header, subheader: subheader, description: description, citation: citation, images: images, icon: icon });
+      return React.createElement(StoryItem, { key: index, header: header, description: description, citation: citation, images: images, icon: icon });
     };
 
     return React.createElement(
@@ -23836,14 +23849,14 @@ var TabBar = React.createClass({
   render: function () {
 
     var selectedPath = this.props.selectedPath;
-    var newsClassName = "mdl-layout__tab",
-        photosClassName = "mdl-layout__tab";
+    var newsClassName = "",
+        photosClassName = "";
 
     if (selectedPath === "/news") {
-      newsClassName = "mdl-layout__tab is-active";
+      newsClassName = "is-active";
     }
     if (selectedPath === "/photos") {
-      photosClassName = "mdl-layout__tab is-active";
+      photosClassName = "is-active";
     }
 
     return React.createElement(
@@ -23851,12 +23864,12 @@ var TabBar = React.createClass({
       { className: "mdl-layout__tab-bar-nojs mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark" },
       React.createElement(
         "a",
-        { href: "/#news", className: newsClassName },
+        { href: "/#news", className: "mdl-layout__tab " + newsClassName },
         "News"
       ),
       React.createElement(
         "a",
-        { href: "/#photos", className: photosClassName },
+        { href: "/#photos", className: "mdl-layout__tab " + photosClassName },
         "Photos"
       )
     );

@@ -5,11 +5,6 @@ var PhotoItem = require("./PhotoItem.jsx");
 var PagePhotos = React.createClass({
   render: function() {
 
-    var photoStyle = {
-      backgroundColor: "red",
-      height: 200
-    }
-
     var photos = [
       "images/photo1.jpg",
       "images/photo2.jpg",
@@ -22,7 +17,6 @@ var PagePhotos = React.createClass({
     ];
 
     var createItem = function(photo, index) {
-      var photo = photo || "images/blank.gif";
       return <PhotoItem key={index} photo={photo} />;
     }
 
